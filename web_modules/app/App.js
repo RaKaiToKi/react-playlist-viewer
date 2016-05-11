@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import Counter from 'Counter';
+
+import Lists from 'htmlElements/Lists';
+
+const artists = [
+	{name: "Mike Portnoy"},
+	{name: "Alex Rudinger"},
+	{name: "Casey Cooper"},
+	{name: "Joey Jordison"}
+]
+
+const kinds = {
+
+	alternative: {name: "alternative"},
+	metal: {name: "metal"},
+	rock: {name: "rock"},
+	pop: {name: "pop"}
+}
 
 export default class App extends Component {
   render() {
     return (
-      <div>
-        Hello React !
-        <Counter name="MON SUPER NOM" />
-        <Counter />
-      </div>
+    	<div>
+
+    		<Lists items={artists} />
+			<Lists items={ Object.keys(kinds).map((k) => {return kinds[k]}) } />
+      	</div>
     );
   }
 }
