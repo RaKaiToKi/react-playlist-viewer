@@ -18,13 +18,33 @@ const kinds = {
 }
 
 export default class App extends Component {
-  render() {
-    return (
-    	<div>
 
-    		<Lists items={artists} />
-			<Lists items={ Object.keys(kinds).map((k) => {return kinds[k]}) } />
-      	</div>
-    );
-  }
+	state = {
+
+		artists : []	
+	}
+  	
+  	componentDidMount(){
+
+  		fetch( "https://api.spotify.com/v1/search?query=Bob*&offset=0&limit=10&type=artist" ).then((response)=>{
+
+			response.json().then((data)=>{
+
+				if( !data.error ){
+
+					this.setState({ artists : data.artists.items });
+				}
+			})
+		});
+	}
+
+  	render() {
+  		return (
+    		<div>
+
+    			<Lists items={artists} />
+				<Lists items={ Object.keys(kinds).map((k) => {return kinds[k]}) } />
+      		</div>
+    	);
+  	}
 }
