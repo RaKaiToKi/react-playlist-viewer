@@ -19,11 +19,12 @@ const Item = ({name ="", image=null, kinds=[], songs=[]}) =>
         })
       }
     </div>
+    <p className={styles.titleList}>Top Songs</p>
     <ul className={styles.list}>
       {
         songs &&
         songs.map((song, index) => {
-          return <li className={styles.song} key={index}>{song.name}</li>
+          return <li className={styles.song} key={index}>{++index} : {song}</li>
         })
       }
     </ul>

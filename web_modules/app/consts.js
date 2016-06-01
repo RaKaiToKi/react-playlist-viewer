@@ -13,8 +13,11 @@ export default {
       },
       getKinds: () =>{
         return apiExplorerPath+`api/genres`
-      }
+      },
+      getTopMusics:(id)=>{
 
+        return apiPath + `artists/${id}/top-tracks?country=FR`
+      }
     }
   }
 }

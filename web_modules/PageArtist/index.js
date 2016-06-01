@@ -3,16 +3,22 @@ import {connect} from "react-redux"
 import fetchJSON from "app/fetchJSON";
 import consts from "app/consts"
 
+import styles from "./index.css"
+
 import { get as getArtist } from "app/reducers/artist"
+import { get as getTopMusics } from "app/reducers/topMusics"
 
 import ItemDetails from "ItemDetails"
+import Youtube from "Youtube"
 
 @connect(
     (state) => ({
-        artist : state.artist
+        artist : state.artist,
+        topMusics : state.topMusics
     }),
     (dispatch) => ({
         getArtist : (value) => dispatch(getArtist(value)),
+        getTopMusics: (value) => dispatch(getTopMusics(value))
     })
 )
 export default class PageArtist extends Component {
@@ -22,31 +28,43 @@ export default class PageArtist extends Component {
         artistId:PropTypes.string,
       }),
       artists : PropTypes.object,
+      topMusics : PropTypes.array,
       getArtist : PropTypes.func,
+      getTopMusics: PropTypes.func
   };
 
   static defaultProps = {
       params: {},
       artist : null,
-      getArtist : () => {}
+      topMusics : null,
+      getArtist : () => {},
+      getTopMusics: () => {}
   };
+
   componentDidMount(){
 
       const {
         params,
         getArtist,
+        getTopMusics,
       } = this.props
 
-      if(params.artistId) getArtist(params.artistId)
+      if(params.artistId){
+
+        getArtist(params.artistId)
+        getTopMusics(params.artistId)
+      }
   }
 
   componentWillReceiveProps(nextProps){
     const {
       params,
       getArtist,
+      getTopMusics,
     } = this.props
 
     if(nextProps.params.artistId!=params.artistId){
+      getTopMusics(nextProps.params.artistId)
       getArtist(nextProps.params.artistId)
     }
   }
@@ -55,15 +73,20 @@ export default class PageArtist extends Component {
     const {
       params,
       artist,
+      topMusics,
     } = this.props
+    
     return (
-      <div>
+      <div className={styles.containerDetails}>
         {
             artist && !artist.loading &&
-            <ItemDetails name={artist.name}
+            <div>
+              <ItemDetails name={artist.name}
                          image={artist.picture ? artist.picture.url : null}
                          kinds={artist.genres}
-                         songs={[{name:"..."},{name:"..."},{name:"..."}]}  />
+                         songs={topMusics} />
+              <Youtube name={artist.name} />
+            </div>
         }
       </div>
     )

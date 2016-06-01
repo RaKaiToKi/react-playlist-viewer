@@ -1,6 +1,7 @@
 .itemDetails{
   display: inline-block;
   width: 400px;
+  text-align: left;
 }
 
 .title {
@@ -22,14 +23,25 @@
 .list{
   list-style-type: none;
   padding: 0;
-  margin-top: 30px;
+}
+
+.titleList{
+
+  margin:  30px 0 0 0;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center;
 }
 
 .song {
   clear: both;
-  border-top: solid 1px #000;
   padding: 5px;
   margin: 5px 0px 0px 5px;
+}
+
+li:not(:last-child){
+
+  border-bottom: solid 1px #000;
 }
 
 @media (--small-viewport) {
@@ -38,7 +50,7 @@
     color: #FFF;
   }
 
-  .song {
-    border-top: solid 1px #FFF;
+  .song:not(:last-child) {
+    border-bottom: solid 1px #FFF;
   }
 }
