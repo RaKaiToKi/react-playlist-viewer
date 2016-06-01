@@ -9,7 +9,6 @@ import { get as getArtist } from "app/reducers/artist"
 import { get as getTopMusics } from "app/reducers/topMusics"
 
 import ItemDetails from "ItemDetails"
-import Youtube from "Youtube"
 
 @connect(
     (state) => ({
@@ -85,7 +84,6 @@ export default class PageArtist extends Component {
                          image={artist.picture ? artist.picture.url : null}
                          kinds={artist.genres}
                          songs={topMusics} />
-              <Youtube name={artist.name} />
             </div>
         }
       </div>

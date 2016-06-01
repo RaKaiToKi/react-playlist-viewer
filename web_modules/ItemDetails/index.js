@@ -24,7 +24,7 @@ const Item = ({name ="", image=null, kinds=[], songs=[]}) =>
       {
         songs &&
         songs.map((song, index) => {
-          return <li className={styles.song} key={index}>{++index} : {song}</li>
+          return <li className={styles.song} key={index}><p>{++index} - <a target="_blank" href={song.uri}>{song.name}</a> - {song.duration} min</p> <p><audio className={styles.audio} src={song.preview} controls>Your browser does not support the audio element.</audio></p></li>
         })
       }
     </ul>

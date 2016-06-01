@@ -12,7 +12,7 @@ const initialState = {
 const format = (data) => {
     const {name, genres, images} = data
     let result = {name, genres}
-    if(images && images.length>2) result.picture = images[3]
+    if(images && images.length>2) result.picture = images[0]
     return result
 }
 

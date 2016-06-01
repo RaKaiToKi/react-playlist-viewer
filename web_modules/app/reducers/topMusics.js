@@ -11,12 +11,21 @@ const format = (data) => {
 
     let result = []
 
-    data = (data.length <= 2) ? data : data.slice(0,3)
+    console.log( data )
+
+    data = (data.length <= 5) ? data : data.slice(0,5)
 
     for (var i = 0; i <= data.length - 1; i++) {
-        
-        result.push(data[i].name)
+
+        var minutes = Math.floor(data[i].duration_ms / 60000);
+        var seconds = ((data[i].duration_ms % 60000) / 1000).toFixed(0);
+
+        data[i].duration_ms = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+
+        result.push({ "name": data[i].name, "preview": data[i].preview_url, "duration": data[i].duration_ms, "uri": data[i].external_urls.spotify })
     };
+
+    console.log( result )
 
     return result
 }
